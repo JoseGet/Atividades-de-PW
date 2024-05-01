@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Instituto de Computação</title>
+    </head>
+    <body>
+
+        <h1>Formulário de Contato</h1>
+
+        Por favor, preencha o formulário abaixo e clique no botao Enviar Mensagem. Agradecemos por seu contato.
+        <br>
+        <br>
+
+        <fieldset>
+
+            <legend>Dados Básicos</legend>
+
+            <form id="dados_basicos" method="POST" action="/user/dados_basicos">
+                Nome <input type="text" name="Nome" id="nome"/> <br>
+                E-mail <input type="email" name="E-mail" id="e-mail" placeholder="seunome@dominio.com.br" size="50" /> <br>
+                Website <input type="url" name="Website" id="website" value="http://" />
+            </form>
+            
+        </fieldset>
+
+        <fieldset>
+
+            <legend>Seu curso no Instituto de Computação</legend>
+
+            <input type="radio" name="curso" value="CC"> Ciência da Computação <br>
+            <input type="radio" name="curso" value="SI"> Sistemas de Informação <br>
+            <input type="radio" name="curso" value="EC"> Engenharia da Computação 
+
+        </fieldset>
+
+        <fieldset>
+
+            <legend>Assinale as linguagens já usadas por você:</legend>
+
+            <label for="java">Java</label>
+            <input type="checkbox" name="linguagem" id="java" value="java">
+            <label for="C">C</label>
+            <input type="checkbox" name="linguagem" id="c" value="c">
+            <label for="C++">C++</label>
+            <input type="checkbox" name="linguagem" id="c++" value="c++">
+            <label for="Perl">Perl</label>
+            <input type="checkbox" name="linguagem" id="perl" value="perl">
+            <label for="python">Python</label>
+            <input type="checkbox" name="linguagem" id="python" value="python">
+            <label for="javascript">Javascript</label>
+            <input type="checkbox" name="linguagem" id="javascript" value="javascript"> 
+
+        </fieldset>
+    
+        
+    </body>
+
+</html>
