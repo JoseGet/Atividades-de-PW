@@ -1,0 +1,16 @@
+p
+{
+    background-color: rgb(167, 161, 161);
+    border: 13px solid black;
+    width: 380px;
+    height: 89px;
+    font-size: 15pt;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 80px;
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 80px;
+    padding: 20px;
+    padding-left: 25px;
+    padding-top: 15px;
+    text-align: justify;
+}
