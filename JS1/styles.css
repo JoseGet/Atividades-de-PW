@@ -1,0 +1,49 @@
+td
+{
+    
+    border: solid;
+    border-style: double;
+    width: 70px;
+    text-align: center;
+    font-size: small;
+}
+
+table
+{
+    border-collapse: collapse;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 5px;
+}
+
+th
+{
+    border: solid;
+    border-style: double;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+
+.resultado
+{
+    border: solid;
+    border-style: double;
+    width: 25px;
+    text-align: center;    
+    font-size: small;
+    margin-left: 0px;
+}
+
+div{
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 50%;
+
+
+}
