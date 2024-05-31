@@ -1,0 +1,11 @@
+input{
+    width: 100px;
+}
+
+.tabelao{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 5px;
+}
