@@ -5,11 +5,21 @@
   let board;
   let snake;
 
-  function init() {
-    board = new Board(SIZE);
-    snake = new Snake([[4, 4], [4, 5], [4, 6]])
-    setInterval(run, 1000 / FPS)
-    board.food()
+  let start_game = false
+  let game_state = true
+  let end_game = false
+
+  let food_board
+
+  function init(sg) {
+    
+    if(sg){
+      board = new Board(SIZE);
+      snake = new Snake([[4, 4], [4, 5], [4, 6]])
+      setInterval(run, 1000 / FPS)
+      food_board = food()
+    }
+
   }
 
   window.addEventListener("keydown", (e) => {
@@ -45,21 +55,6 @@
           row.appendChild(field)
         }
       }
-    }
-
-    food(){
-
-      const food = [Math.floor(Math.random() * 40) + 1, Math.floor(Math.random() * 40) + 1]
-
-      if(food in snake.body){
-        
-        while(food in snake.body){
-          food = [Math.floor(Math.random() * 40) + 1, Math.floor(Math.random() * 40) + 1]
-        }
-      } 
-
-      document.querySelector(`#board tr:nth-child(${food[0]}) td:nth-child(${food[1]})`).style.backgroundColor = "#222"
-
     }
 
   }
@@ -102,20 +97,46 @@
 
   function run() {
 
-    snake.walk()
-
-    const snakeHead = snake.body[snake.body.length - 1]
-
-    if(snakeHead[0] == board.food[0] && snakeHead[1] == board.food[1]){
-      board.food()
+    if(game_state && end_game == false){
+      snake.walk()
     }
 
+    if(food_board[0] == snake.body[snake.body.length - 1][0]&& food_board[1] == snake.body[snake.body.length - 1][1]){
+      food_board = food()
+    }
+
+    // if(snake.body[snake.body.length - 1][0])
+
   }
+
+  function food(){
+
+    let food;
+
+    do {
+      food = [Math.floor(Math.random() * 40) + 1, Math.floor(Math.random() * 40) + 1];
+    } while (snake.body.some(segment => segment[0] === food[0] && segment[1] === food[1]));
+
+    document.querySelector(`#board tr:nth-child(${food[0]}) td:nth-child(${food[1]})`).style.backgroundColor = "#222"
+
+    return food
+
+  }
+
+  addEventListener("keydown", function(event){
+
+    if(event.key == "p"){
+      game_state = !game_state
+    }
+
+  })
   
 
   addEventListener("keydown", function(event){
-    if(event.keyCode == 83){
-      init()
+    if(event.keyCode == 83 && start_game == false){
+      start_game = true
+      end_game = false
+      init(start_game)
     }
   })
 
