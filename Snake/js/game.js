@@ -9,6 +9,7 @@
     board = new Board(SIZE);
     snake = new Snake([[4, 4], [4, 5], [4, 6]])
     setInterval(run, 1000 / FPS)
+    board.food()
   }
 
   window.addEventListener("keydown", (e) => {
@@ -45,6 +46,22 @@
         }
       }
     }
+
+    food(){
+
+      const food = [Math.floor(Math.random() * 40) + 1, Math.floor(Math.random() * 40) + 1]
+
+      if(food in snake.body){
+        
+        while(food in snake.body){
+          food = [Math.floor(Math.random() * 40) + 1, Math.floor(Math.random() * 40) + 1]
+        }
+      } 
+
+      document.querySelector(`#board tr:nth-child(${food[0]}) td:nth-child(${food[1]})`).style.backgroundColor = "#222"
+
+    }
+
   }
 
   class Snake {
@@ -84,7 +101,22 @@
   }
 
   function run() {
+
     snake.walk()
+
+    const snakeHead = snake.body[snake.body.length - 1]
+
+    if(snakeHead[0] == board.food[0] && snakeHead[1] == board.food[1]){
+      board.food()
+    }
+
   }
-  init()
+  
+
+  addEventListener("keydown", function(event){
+    if(event.keyCode == 83){
+      init()
+    }
+  })
+
 })()
