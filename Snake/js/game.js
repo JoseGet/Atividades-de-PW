@@ -13,25 +13,29 @@
   let pontuacao = 0;
   let food_board
 
-  const scoreElement = document.createElement("div");
-  scoreElement.textContent = "Score: 00000";
-  scoreElement.style.position = "absolute";
-  scoreElement.style.top = "3px";
-  scoreElement.style.left = "3px";
-  scoreElement.style.padding = "10px";
+  let contador_frames = 0;
 
-  const gameOverMessage = document.createElement("div");
-  gameOverMessage.textContent = "Fim do jogo!";
-  gameOverMessage.style.position = "fixed";
-  gameOverMessage.style.top = "3px";
-  gameOverMessage.style.right = "453px";
-  gameOverMessage.style.padding = "10px";
-  gameOverMessage.style.display = "none"; // Começa oculto
-  document.body.appendChild(gameOverMessage);
+  let cor_atual = ""
+
+  const Pontuacao = document.createElement("div");
+  Pontuacao.textContent = "00000";
+  Pontuacao.style.position = "absolute";
+  Pontuacao.style.top = "3px";
+  Pontuacao.style.left = "3px";
+  Pontuacao.style.padding = "10px";
+
+  const FimDeJogo = document.createElement("div");
+  FimDeJogo.textContent = "Fim do jogo!";
+  FimDeJogo.style.position = "fixed";
+  FimDeJogo.style.top = "3px";
+  FimDeJogo.style.right = "453px";
+  FimDeJogo.style.padding = "10px";
+  FimDeJogo.style.display = "none";
+  document.body.appendChild(FimDeJogo);
 
   function init() {
     
-    document.body.appendChild(scoreElement);
+    document.body.appendChild(Pontuacao);
 
     board = new Board(SIZE);
     snake = new Snake([[4, 4], [4, 5], [4, 6]])
@@ -143,7 +147,7 @@
     if(game_state === true && end_game === false){
       snake.walk()
 
-      let cor_food_board = food_board.cor_atual 
+      let cor_food_board = cor_atual 
 
       if(food_board[0] == snake.body[snake.body.length - 1][0] && food_board[1] == snake.body[snake.body.length - 1][1]){
 
@@ -158,10 +162,18 @@
         snake.comeu = true;
       }
 
+      contador_frames = contador_frames + 1;
+      if (contador_frames >= 60) {
+        contador_frames = 0;
+        FPS *= 1.01;
+        clearInterval(dificuldade);
+        dificuldade = setInterval(run, 1000 / FPS)
+      }
+
     }
 
     if(end_game === true){
-      gameOverMessage.style.display = "block";
+      FimDeJogo.style.display = "block";
       start_game = false;
       restart = true;
     }
@@ -169,13 +181,12 @@
   }
 
   function aumentar_pontos() {
-    scoreElement.textContent = `Score: ${pontuacao.toString().padStart(5, "0")}`;
+    Pontuacao.textContent = pontuacao.toString().padStart(5, "0");
   }
 
   function food(){
 
     let food;
-    let cor_atual = ""
 
     let randow_number = Math.floor(Math.random() * 6) + 1;
 
@@ -208,13 +219,15 @@
     if(event.keyCode == 83 && start_game == false && restart == false){
       start_game = true
       end_game = false
-      score = 0;
-      scoreElement.textContent = "Score: 00000";
-      setInterval(run, 1000 / FPS)
+      pontuacao = 0;  
+      Pontuacao.textContent = "00000";
+      dificuldade = setInterval(run, 1000 / FPS)
     } else if (event.keyCode == 83 && restart == true){
       location.reload();
     }
   })
+
+  let dificuldade;
 
   init()
 
