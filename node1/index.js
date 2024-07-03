@@ -8,6 +8,8 @@ process.argv.forEach((val) => {
 
 
 const http = require('http');
+require('dotenv').config();
+const PORT = process.env.PORT ?? 8080;
 const server = http.createServer(function(req,res){
 res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
 
@@ -22,6 +24,6 @@ res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
         res.end();
     })
 });
-server.listen(3333);
+server.listen(PORT);
 
 
