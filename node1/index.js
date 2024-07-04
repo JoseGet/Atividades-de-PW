@@ -1,4 +1,5 @@
 const fs = require('fs');
+const dotenv = require("dotenv")
 
 let diretorio = ""
 
@@ -8,7 +9,7 @@ process.argv.forEach((val) => {
 
 
 const http = require('http');
-require('dotenv').config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 const PORT = process.env.PORT ?? 8080;
 const server = http.createServer(function(req,res){
 res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
