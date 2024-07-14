@@ -8,7 +8,7 @@ import logger from "./middlewares/logger";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT ?? 4466;
-app.use(morgan("combined"))
+app.use(router)
 
 app.get("/", (req: Request, res) => {
     res.send("Exercicio 3")
