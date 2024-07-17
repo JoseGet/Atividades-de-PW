@@ -7,7 +7,7 @@ res.end('Welcome to Web academy!');
 
 const hb1 = (req: Request,res: Response) => {
     res.render("main/hb1", { 
-      mensagem: 'Ola, voce esta aprenddendo Express + HBS!' 
+      uf: 'Universidade Federal do Amazonas' 
 });
 };
 

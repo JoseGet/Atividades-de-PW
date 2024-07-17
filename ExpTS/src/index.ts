@@ -4,10 +4,21 @@ import morgan from 'morgan';
 import router from './router/router';
 import {engine} from 'express-handlebars'
 import logger from "./middlewares/logger";
+import sass from 'node-sass-middleware';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT ?? 4466;
+const PORT = process.env.PORT ?? 3333;
+
+app.use(sass({
+    src: `${__dirname}/../public/scss`,
+    dest: `${__dirname}/../public/css`,
+    outputStyle: "compressed",
+    prefix: "/css",
+}));
+
+app.use("/css", express.static(`${__dirname}/../public/css`));
+
 app.use(router)
 
 app.engine("handlebars", engine());
