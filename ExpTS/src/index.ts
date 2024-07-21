@@ -6,6 +6,14 @@ import {engine} from 'express-handlebars'
 import logger from "./middlewares/logger";
 import sass from 'node-sass-middleware';
 import cookieParser = require("cookie-parser");
+import session from "express-session";
+import { v4 } from "uuid";
+
+declare module "express-session"{
+    interface SessionData{ 
+        uid: string;
+    }
+}
 
 dotenv.config();
 const app = express();
@@ -25,11 +33,19 @@ app.use('/js', [
     express.static(`${__dirname}/../node_modules/bootstrap/dist/js/`)
 ]);
 
+app.use(cookieParser());
+
+app.use(session({
+    genid: () => v4(), 
+    secret: 'HOI$%^@fdsSAFSFS',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 360000 },
+}));
+
 app.use(express.urlencoded({extended: false}));
 
 app.use(router)
-
-app.use(cookieParser());
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");

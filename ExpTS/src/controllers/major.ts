@@ -12,12 +12,13 @@ const index = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
+    
     if (req.method === "GET") {
         res.render("major/create");
     } else {
         try {
             await creatMajor(req.body);
-            res.send("criado");
+            res.redirect("/major")
         } catch(err) {
             console.log(err);
             res.status(500).send(err);
@@ -49,7 +50,7 @@ const update = async (req: Request, res: Response) => {
     } else {
         try {
             await updateMajor(id, req.body);
-            res.send("modificado");
+            res.redirect("/major")
         } catch(err) {
             console.log(err);
             res.status(500).send(err);
@@ -61,8 +62,8 @@ const remove = async (req: Request, res: Response) => {
 
     const {id} = req.params;
     try{
-        const major = await removeMajor(id)
-        res.render("major/remove", {major});
+        await removeMajor(id)
+        res.redirect("/major")
     } catch(err) {
         console.log(err);
         res.status(500).send(err);
