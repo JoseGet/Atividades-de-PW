@@ -5,6 +5,7 @@ import router from './router/router';
 import {engine} from 'express-handlebars'
 import logger from "./middlewares/logger";
 import sass from 'node-sass-middleware';
+import cookieParser = require("cookie-parser");
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,8 @@ app.use('/js', [
 app.use(express.urlencoded({extended: false}));
 
 app.use(router)
+
+app.use(cookieParser());
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");

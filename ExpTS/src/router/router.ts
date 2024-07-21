@@ -23,4 +23,6 @@ router.get('/hb4', mainController.hb4);
 router.get('/lorem/:num', mainController.lorem);
 router.get('/sobre', mainController.sobre);
 
+router.get('/create-cookie', mainController.createCookie);
+
 export default router;
